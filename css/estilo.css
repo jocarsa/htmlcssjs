@@ -34,7 +34,7 @@ main section:nth-child(1) article{
     align-content: stretch;
     height:550px;
     margin-bottom:1px;
-    color:white;
+    color:black;
     border-radius:5px;
 }
 main section:nth-child(1) article *{
