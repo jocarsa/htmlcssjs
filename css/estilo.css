@@ -120,25 +120,17 @@ main section:nth-child(1) h2{font-size:52px;}
 }
 #principal section:nth-child(3) h2{font-size:32px;}
 /* Estilos del carrusel 2 //////////////////////////////////////////// */
-@keyframes carrusel2{
-    0%{margin-left:-300%;}
-    100%{margin-left:0%;}
-}
+
 #principal section:nth-child(4){
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    align-content: stretch;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
     width:500%;
     height:200px;
     position:relative;
     margin-left:-200%;
     gap:5px;
     margin-top:10px;
-    animation:carrusel2 60s;
-    animation-timing-function: linear;
+    
 }
 #principal section:nth-child(4) article{
     width:400px;
