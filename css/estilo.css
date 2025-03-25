@@ -32,7 +32,7 @@ main section:nth-child(1) article{
     justify-content: center;
     align-items: center;
     align-content: stretch;
-    height:400px;
+    height:550px;
     margin-bottom:1px;
     color:white;
 }
