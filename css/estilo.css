@@ -232,7 +232,8 @@ main img{
     width:10%;
     
     text-align:center;
-    
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    border-radius: 97px;
 }
 /* Estilo de las páginas */
 section{
