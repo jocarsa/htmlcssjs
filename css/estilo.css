@@ -50,6 +50,9 @@ main section:nth-child(1) article a{
 }
 main section:nth-child(1) h2{font-size:52px;}
 /* Estilos de los destacados //////////////////////////////////////////// */
+#principal section{
+    width:100%;
+}
 #principal section:nth-child(2){
     display:grid;
     grid-template-columns: auto auto;
