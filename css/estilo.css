@@ -132,7 +132,7 @@ main section:nth-child(1) h2{font-size:52px;}
     
 }
 #principal section:nth-child(4) article{
-    width:400px;
+    
     height:200px;
     display: flex;
     flex-direction: column;
