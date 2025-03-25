@@ -63,7 +63,7 @@ main section:nth-child(1) h2{font-size:52px;}
 }
 #principal section:nth-child(2) article{
     height:400px;
-    color:white;
+    
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -76,9 +76,9 @@ main section:nth-child(1) h2{font-size:52px;}
     margin:5px;
 }
 #principal section:nth-child(2) article a{
-    color:black;
+    color:white;
     text-decoration: none;
-    background:white;
+    background:indigo;
     padding:10px;
     border-radius:40px;
     margin:3px;
@@ -113,9 +113,9 @@ main section:nth-child(1) h2{font-size:52px;}
     margin:5px;
 }
 #principal section:nth-child(3) article a{
-    color:black;
+    color:white;
     text-decoration: none;
-    background:white;
+    background:indigo;
     padding:10px;
     border-radius:40px;
     margin:3px;
@@ -149,9 +149,9 @@ main section:nth-child(1) h2{font-size:52px;}
     margin:5px;
 }
 #principal section:nth-child(4) article a{
-    color:black;
+    color:white;
     text-decoration: none;
-    background:white;
+    background:indigo;
     padding:10px;
     border-radius:40px;
     margin:3px;
