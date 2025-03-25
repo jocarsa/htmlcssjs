@@ -106,7 +106,7 @@ main section:nth-child(1) h2{font-size:52px;}
     justify-content: center;
     align-items: center;
     align-content: stretch;
-    color:white;
+    color:black;
 }
 #principal section:nth-child(3) article h2,section:nth-child(3) article h3{
     padding:0px;
@@ -142,7 +142,7 @@ main section:nth-child(1) h2{font-size:52px;}
     justify-content: center;
     align-items: center;
     align-content: stretch;
-    color:white;
+    color:black;
 }
 #principal section:nth-child(4) article h2,section:nth-child(4) article h3{
     padding:0px;
