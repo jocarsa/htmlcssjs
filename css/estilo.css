@@ -124,8 +124,7 @@ main section:nth-child(1) h2{font-size:52px;}
 #principal section:nth-child(4){
     display: grid;
     grid-template-columns: auto auto auto auto;
-    width:500%;
-    height:200px;
+    
    
     
     gap:5px;
