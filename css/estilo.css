@@ -43,11 +43,12 @@ main section:nth-child(1) article *{
 }
 main section:nth-child(1) article a{
     padding:10px;
-    background:white;
-    color:black;
+    background:indigo;
+    color:white;
     border:none;
     border-radius:40px;
     text-decoration:none;
+    box-shadow:0px 4px 8px rgba(0,0,0,0.3);
 }
 main section:nth-child(1) h2{font-size:52px;}
 /* Estilos de los destacados //////////////////////////////////////////// */
@@ -217,7 +218,7 @@ article{
     background-size:cover;
 }
 h2,h3{
-    text-shadow:0px 2px 3px black;
+   
 }
 article a{
     width:150px;
