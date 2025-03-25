@@ -50,13 +50,13 @@ main section:nth-child(1) article a{
 }
 main section:nth-child(1) h2{font-size:52px;}
 /* Estilos de los destacados //////////////////////////////////////////// */
-main section:nth-child(2){
+#principal section:nth-child(2){
     display:grid;
     grid-template-columns: auto auto;
     gap:10px;
     margin-top:10px;
 }
-main section:nth-child(2) article{
+#principal section:nth-child(2) article{
     height:400px;
     color:white;
     display: flex;
@@ -66,11 +66,11 @@ main section:nth-child(2) article{
     align-items: center;
     align-content: stretch; 
 }
-main section:nth-child(2) article h2,section:nth-child(2) article h3{
+#principal section:nth-child(2) article h2,section:nth-child(2) article h3{
     padding:0px;
     margin:5px;
 }
-main section:nth-child(2) article a{
+#principal section:nth-child(2) article a{
     color:black;
     text-decoration: none;
     background:white;
@@ -78,13 +78,13 @@ main section:nth-child(2) article a{
     border-radius:40px;
     margin:3px;
 }
-main section:nth-child(2) h2{font-size:36px;}
+#principal section:nth-child(2) h2{font-size:36px;}
 /* Estilos del carrusel 1 //////////////////////////////////////////// */
 @keyframes carrusel1{
     0%{margin-left:-200%;}
     100%{margin-left:-100%;}
 }
-main section:nth-child(3){
+#principal section:nth-child(3){
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -100,7 +100,7 @@ main section:nth-child(3){
     animation:carrusel1 60s;
     animation-timing-function: linear;
 }
-main section:nth-child(3) article{
+#principal section:nth-child(3) article{
     width:400px;
     height:400px;
     display: flex;
@@ -111,11 +111,11 @@ main section:nth-child(3) article{
     align-content: stretch;
     color:white;
 }
-main section:nth-child(3) article h2,section:nth-child(3) article h3{
+#principal section:nth-child(3) article h2,section:nth-child(3) article h3{
     padding:0px;
     margin:5px;
 }
-main section:nth-child(3) article a{
+#principal section:nth-child(3) article a{
     color:black;
     text-decoration: none;
     background:white;
@@ -123,13 +123,13 @@ main section:nth-child(3) article a{
     border-radius:40px;
     margin:3px;
 }
-main section:nth-child(3) h2{font-size:32px;}
+#principal section:nth-child(3) h2{font-size:32px;}
 /* Estilos del carrusel 2 //////////////////////////////////////////// */
 @keyframes carrusel2{
     0%{margin-left:-300%;}
     100%{margin-left:0%;}
 }
-main section:nth-child(4){
+#principal section:nth-child(4){
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -145,7 +145,7 @@ main section:nth-child(4){
     animation:carrusel2 60s;
     animation-timing-function: linear;
 }
-main section:nth-child(4) article{
+#principal section:nth-child(4) article{
     width:400px;
     height:200px;
     display: flex;
@@ -156,11 +156,11 @@ main section:nth-child(4) article{
     align-content: stretch;
     color:white;
 }
-main section:nth-child(4) article h2,section:nth-child(4) article h3{
+#principal section:nth-child(4) article h2,section:nth-child(4) article h3{
     padding:0px;
     margin:5px;
 }
-main section:nth-child(4) article a{
+#principal section:nth-child(4) article a{
     color:black;
     text-decoration: none;
     background:white;
@@ -168,15 +168,15 @@ main section:nth-child(4) article a{
     border-radius:40px;
     margin:3px;
 }
-main section:nth-child(4) h2{font-size:32px;}
+#principal section:nth-child(4) h2{font-size:32px;}
 
 /* Estilos del texto informativo //////////////////////////////////////////// */
-main section:nth-child(5){
+#principal section:nth-child(5){
     box-sizing:border-box;
     padding:20px;
     text-align:center;
 }
-main section:nth-child(5) p{
+#principal section:nth-child(5) p{
     width:80%;
     margin:auto;
     text-align:justify;
@@ -246,4 +246,89 @@ main img{
     
     text-align:center;
     
+}
+/* Estilo de las páginas */
+section{
+    width:800px;
+    margin:auto;
+}
+section p{
+    text-align:justify;
+}
+/* Estilo de la presentación en formato rejilla */
+#rejilla{
+    display:grid;
+    grid-template-columns: auto auto auto;
+    width:1280px;
+}
+/* Estilos para la landing page */
+#landing{
+    background:rgb(240,240,240);
+}
+.captura{
+    width:800px;
+    border-radius:10px;
+    box-shadow:0px 4px 10px rgba(0,0,0,0.3);
+}
+#landing section,#landing h2{
+    margin-top:50px;
+    margin-bottom:50px;
+}
+#landing section:first-child{
+    margin-top:0px;
+}
+#landing #destacados,#landing #precios{
+    display:grid;
+    grid-template-columns: auto auto auto;
+    gap:20px;
+}
+#landing #destacados article,#landing #precios article{
+    border:1px solid lightgrey;
+    border-radius:4px;
+    height:200px;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+    padding:20px;
+    box-shadow:0px 4px 8px rgba(0,0,0,0.1);
+    background:white;
+}
+#landing #destacados p,#landing #precios p{
+    text-align:center !important;
+}
+#landing iframe{
+    width:100%;
+    height:500px;
+    border:0px;
+    border-radius:10px;
+    box-shadow:0px 4px 8px rgba(0,0,0,0.3);
+}
+#landing form{
+    width:500px;
+    margin:auto;
+}
+#landing form label,#landing form input,#landing form textarea{
+    width:100%;
+    text-align:left !important;
+    
+    box-sizing:border-box;
+    padding:10px;
+    margin:10px;
+    border-radius:5px;
+}
+#landing form input,#landing form textarea{
+    border:1px solid lightgrey;
+}
+#landing form input[type=submit]{
+    text-align:center !important;
+    background:indigo;
+    color:white;
+    border-radius:40px;
+}
+#landing section:first-child{
+    width:100%;
+    margin-bottom:50px;
 }

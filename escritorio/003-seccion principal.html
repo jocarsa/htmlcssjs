@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Title</title>
+        <style>
+            html,body{
+                padding:0px;
+                margin:0px;
+                font-family: sans-serif;
+                height:100%;
+            }
+            body{
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                align-items: stretch;
+                align-content: stretch;
+            }
+            header,footer{
+                background:DarkSlateGray;
+                color:white;
+                flex:1;
+            }
+            main{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                align-items: stretch;
+                align-content: stretch;
+                flex:30;
+            }
+            nav{
+                background:DarkSlateGray;
+                color:white;
+                flex:1;
+            }
+            section{
+                flex:5;
+            }
+            header,footer,nav,section{
+                padding:10px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            Cabecera
+        </header>
+        <main>
+            <nav>Navegación</nav>
+            <section>Principal</section>
+        </main>
+        <footer>
+            Pié de página
+        </footer>
+    </body>
+</html>
