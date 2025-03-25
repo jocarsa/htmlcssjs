@@ -133,7 +133,7 @@ main section:nth-child(1) h2{font-size:52px;}
 }
 #principal section:nth-child(4) article{
     
-    height:200px;
+    height:300px;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
