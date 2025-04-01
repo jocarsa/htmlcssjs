@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Title</title>
+        <style>
+            /* Estilos generales /////////////////////////////////// */
+            html,body{
+                padding:0px;
+                margin:0px;
+                font-family: sans-serif;
+                height:100%;
+                transition:all 1s;
+            }
+            body{
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                align-items: stretch;
+                align-content: stretch;
+                background:DarkSlateGray;
+                font-size:1em;
+                
+            }
+            header,footer{
+                
+                color:white;
+                flex:1;
+            }
+            main{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                align-items: stretch;
+                align-content: stretch;
+                flex:30;
+            }
+             header,footer,nav,section{
+                padding:10px;
+            }
+            
+            
+            
+            
+            /* Estilos de la sección principal /////////////////////////////////// */
+            
+            table{
+                width:100%;
+                border-collapse:collapse;
+            }
+            table thead{
+                background:DarkSlateGray;
+                color:white;
+            }
+            table th,table td{
+                padding:10px;
+            }
+            table tbody tr{
+                border-bottom:1px solid lightgrey;
+            }
+            .actualizar{
+                background:yellow;
+                color:black;
+                padding:5px;
+                border-radius:5px;
+                margin:5px;
+                text-decoration: none;
+                font-size:10px;
+            }
+            .eliminar{
+                background:red;
+                color:white;
+                padding:5px;
+                border-radius:5px;
+                margin:5px;
+                text-decoration: none;
+                font-size:10px;
+            }
+            
+            
+            .eliminar,.actualizar{
+                filter: brightness(14.5);
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Componente cabecera /////////////////////////////////////////////////////////// -->
+        <style>
+            /* Estilos de la cabecera /////////////////////////////////// */
+            
+            header h1{
+                margin:0px;
+                padding:10px;
+                flex 1;
+                font-size:20px;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: center;
+                align-items: center;
+                align-content: stretch;
+            }
+            header h1 img{
+                width:25px;
+                margin-right:16px;
+            }
+            header{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                align-items: center;
+                align-content: stretch;
+            }
+            header .boton{
+                border:0px;
+                background:white;
+                width:30px;
+                height:30px;
+            }
+            header .boton:first-child{
+                border-radius:5px 0px 0px 5px;
+            }
+            header .boton:last-child{
+                border-radius:0px 5px 5px 0px;
+            }
+            header nav{
+                flex:3;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: center;
+                align-items: center;
+                align-content: stretch;
+                gap:2px;
+            }
+            header #cerrarsesion{
+                flex:1;
+            }
+            #cerrarsesion{
+                filter: brightness(14.5);
+            }
+            #textogrande{
+               
+            }
+            #textopequeno{
+                font-size:10px;
+            }
+            header .icono{
+                filter: brightness(0);
+            }
+        </style>
+        <header>
+            <h1><img src="https://static.jocarsa.com/logos/teal.png">jocarsa | aplicación</h1>
+            <nav>
+                <button class="boton">A</button>
+                <button class="boton">A</button>
+                <button class="boton">A</button>
+                <button class="boton" id="invertir"><span class="icono">☀</span></button>
+                <button class="boton" id="textogrande"><span class="icono">🔎</span></button>
+                <button class="boton" id="textopequeno"><span class="icono">🔎</span></button>
+            </nav>
+            <div id="cerrarsesion">🔒</div>
+        </header>
+        <script>
+            let tamanioinicial = 1;
+            let invertido = false;
+            document.querySelector("#cerrarsesion").onclick = function(){
+                window.location = "../login/004-estilo del formulario.html"
+            }
+            document.querySelector("#textogrande").onclick = function(){
+                tamanioinicial *= 1.1;
+                document.querySelector("body").style.fontSize = tamanioinicial+"em"
+            }
+            document.querySelector("#textopequeno").onclick = function(){
+                tamanioinicial *= 0.9;
+                document.querySelector("body").style.fontSize = tamanioinicial+"em"
+            }
+            
+            document.querySelector("#invertir").onclick = function(){
+                if(invertido){
+                    document.querySelector("html").style.filter = "invert(0)  hue-rotate(0deg)"
+                    invertido = false;
+                }else{
+                    document.querySelector("html").style.filter = "invert(1)  hue-rotate(150deg)"
+                    invertido = true;
+                }
+            }
+        </script>
+        <!-- Componente cabecera /////////////////////////////////////////////////////////// -->
+        <main>
+            <!-- Componente menu de navegacion /////////////////////////////////////////////////////////// -->
+            <style>
+                /* Menu izquierdo de navegacion /////////////////////////////////// */
+            
+                main nav{
+                    background:DarkSlateGray;
+                    color:white;
+                    width:200px;
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+                    justify-content: space-between;
+                    align-items: stretch;
+                    align-content: stretch;
+                    padding-right:0px !important;
+                    transition:all 1s;
+
+                }
+                main nav .enlaces{
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+                    justify-content: flex-start;
+                    align-items: stretch;
+                    align-content: stretch;
+                }
+                section{
+                    background:white;
+                    flex:5;
+                    border-radius:10px 0px 0px 10px;
+                    box-shadow:0px 5px 10px rgba(0,0,0,0.4);
+                    padding:30px !important;
+                    position:relative;
+                    z-index:10000;
+                }
+
+                main nav a{
+                    color:white;
+                    text-decoration:none;
+                    padding:10px;
+                    width:200px;
+                }
+                main nav hr{
+                    width:100%;
+                    border:none;
+                    border-bottom:1px solid lightgrey;
+                }
+                main .activo{
+                    background:white;
+                    color:DarkSlateGray;
+                    border-radius:10px 0px 0px 10px;
+                    position:relative;
+                    z-index:10000;
+                }
+                main .icono{
+                    background:white;
+                    width:20px;
+                    height:20px;
+                    display:inline-block;
+                    border-radius:20px;
+                    color:DarkSlateGray;
+                    text-align:center;
+                    font-weight:bold;
+                    margin-right:20px;
+                    line-height: 20px;
+                }
+                main .activo .icono{
+                    background:DarkSlateGray;
+                    width:20px;
+                    height:20px;
+                    display:inline-block;
+                    border-radius:20px;
+                    color:white;
+                    text-align:center;
+                    font-weight:bold;
+                    margin-right:20px;
+                }
+                #ocultar{
+                    padding:10px;
+                    width:200px;
+
+                }
+                #ocultar .icono{
+                    transform:rotate(180deg);
+                    transition:all 1s;
+                }
+            </style>
+            <nav>
+                <div class="enlaces">
+                    <a href=""><span class="icono">A</span><span class="enlace">{Enlace 1}</span></a>
+                    <a href=""><span class="icono">A</span><span class="enlace">{Enlace 2}</span></a>
+                    <a href="" class="activo"><span class="icono">A</span><span class="enlace">{Enlace 3}</span></a>
+                    <hr>
+                    <a href=""><span class="icono">A</span><span class="enlace">{Enlace 4}</span></a>
+                    <a href=""><span class="icono">A</span><span class="enlace">{Enlace 5}</span></a>
+                    <a href=""><span class="icono">A</span><span class="enlace">{Enlace 6}</span></a>
+                    <a href=""><span class="icono">A</span><span class="enlace">{Enlace 7}</span></a>
+                    <hr>
+                    <a href=""><span class="icono">A</span><span class="enlace">{Enlace 8}</span></a>
+                    <a href=""><span class="icono">A</span><span class="enlace">{Enlace 9}</span></a>
+                    <a href=""><span class="icono">A</span><span class="enlace">{Enlace 10}</span></a>
+                </div>
+                <div class="operaciones">
+                    <div id="ocultar"><span class="icono">></span>Ocultar</div>
+                </div>
+            </nav>
+            <script>
+                let mostrado = true;
+                
+                // Recuperamos el estado del menu de localstorage //////////////////////////
+                
+                let estadoinicial = localStorage.getItem("jocarsa_menu");
+                if(estadoinicial == "true"){
+                    document.querySelector("main nav").style.width = "200px"
+                    mostrado = true;
+                }else{
+                    document.querySelector("main nav").style.width = "45px"
+                    mostrado = false;
+                }
+                
+                // El menú reacciona a cómo pulsamos el botón //////////////////////////////
+                
+                let boton = document.querySelector("#ocultar");
+                boton.onclick = function(){
+                    console.log("Has pulsado el boton");
+                    if(mostrado){
+                        document.querySelector("main nav").style.width = "45px"
+                        document.querySelector("#ocultar .icono").style.transform = "rotate(0deg)"
+                        mostrado = false;
+                        localStorage.setItem("jocarsa_menu",false);
+                    }else{
+                        document.querySelector("main nav").style.width = "200px"
+                        document.querySelector("#ocultar .icono").style.transform = "rotate(180deg)"
+                        mostrado = true;
+                        localStorage.setItem("jocarsa_menu",true);
+                    }
+                }
+            </script>
+            <!-- Componente menu de navegacion /////////////////////////////////////////////////////////// -->
+            <section>
+                <h3>Artículos</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Fecha</th>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2025-03-25</td>
+                            <td>Artículo 1</td>
+                            <td>Jose Vicente Carratalá</td>
+                            <td><a href="" class="actualizar">✏</a><a href="" class="eliminar">❌</a></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2025-03-25</td>
+                            <td>Artículo 1</td>
+                            <td>Jose Vicente Carratalá</td>
+                            <td><a href="" class="actualizar">✏</a><a href="" class="eliminar">❌</a></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2025-03-25</td>
+                            <td>Artículo 1</td>
+                            <td>Jose Vicente Carratalá</td>
+                            <td><a href="" class="actualizar">✏</a><a href="" class="eliminar">❌</a></td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2025-03-25</td>
+                            <td>Artículo 1</td>
+                            <td>Jose Vicente Carratalá</td>
+                            <td><a href="" class="actualizar">✏</a><a href="" class="eliminar">❌</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+        <footer>
+            
+            
+            Pié de página
+        </footer>
+    </body>
+</html>
