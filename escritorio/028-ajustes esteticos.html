@@ -28,7 +28,7 @@
             header,footer{
                 
                 color:white;
-                flex:1;
+                flex:2;
             }
             main{
                 display: flex;
@@ -40,10 +40,32 @@
                 flex:30;
             }
              header,footer,nav,section{
-                padding:10px;
+                padding:0px;
+            }
+            h3{
+            	padding:0px;
+            	margin:0px;
             }
             
-            
+            .relieve {
+  background-color: rgba(0,0,0,0.3); /* Solid base color */
+top:0px;
+  border: none;
+  box-shadow:
+    0 4px 0 rgba(255,255,255,0.7),     /* Main relief shadow (down) */
+    0 6px 6px rgba(0, 0, 0, 0.2); /* Soft drop shadow for depth */
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.relieve:active {
+  top: 4px;
+  box-shadow:
+    0 0 0 #357ab7,        /* Remove relief */
+    0 2px 4px rgba(0, 0, 0, 0.2); /* Softer shadow */
+}
+
+
             
             
             
@@ -101,7 +123,7 @@
                 gap:2px;
             }
             header #cerrarsesion{
-                flex:1;
+               
             }
             #cerrarsesion{
                 filter: brightness(14.5);
@@ -119,12 +141,21 @@
         <header>
             <h1><img src="https://static.jocarsa.com/logos/teal.png">jocarsa | aplicación</h1>
             <nav>
-                <button class="boton">A</button>
-                <button class="boton">A</button>
-                <button class="boton">A</button>
-                <button class="boton" id="invertir"><span class="icono">☀</span></button>
-                <button class="boton" id="textogrande"><span class="icono">🔎</span></button>
-                <button class="boton" id="textopequeno"><span class="icono">🔎</span></button>
+                <button class="boton relieve">A</button>
+                <button class="boton relieve">A</button>
+                <button class="boton relieve">A</button>
+                <button class="boton relieve">A</button>
+                <button class="boton relieve">A</button>
+                <button class="boton relieve">A</button>
+                <button class="boton relieve">A</button>
+                <button class="boton relieve">A</button>
+                <button class="boton relieve">A</button>
+                <button class="boton relieve">A</button>
+                <button class="boton relieve">A</button>
+                <button class="boton relieve">A</button>
+                <button class="boton relieve" id="invertir"><span class="icono">☀</span></button>
+                <button class="boton relieve" id="textogrande"><span class="icono">🔎</span></button>
+                <button class="boton relieve" id="textopequeno"><span class="icono">🔎</span></button>
             </nav>
             <div id="cerrarsesion">🔒</div>
         </header>
@@ -171,6 +202,7 @@
                     align-content: stretch;
                     padding-right:0px !important;
                     transition:all 1s;
+                    margin-left:10px;
 
                 }
                 main nav .enlaces{
@@ -197,19 +229,14 @@
                     text-decoration:none;
                     padding:10px;
                     width:200px;
+                    transition:all 1s;
                 }
                 main nav hr{
                     width:100%;
                     border:none;
                     border-bottom:1px solid lightgrey;
                 }
-                main .activo{
-                    background:white;
-                    color:DarkSlateGray;
-                    border-radius:10px 0px 0px 10px;
-                    position:relative;
-                    z-index:10000;
-                }
+                
                 main .icono{
                     background:white;
                     width:30px;
@@ -221,13 +248,21 @@
                     font-weight:bold;
                     margin-right:20px;
                     line-height: 30px;
+                    text-transform:uppercase;
+                }
+                main .activo,main nav>div>div:hover{
+                    background:white;
+                    color:DarkSlateGray;
+                    border-radius:10px 0px 0px 10px;
+                    position:relative;
+                    z-index:10000;
                 }
                 main .activo .icono{
                     background:DarkSlateGray;
-                    width:20px;
-                    height:20px;
+                    width:30px;
+                    height:30px;
                     display:inline-block;
-                    border-radius:20px;
+                    border-radius:30px;
                     color:white;
                     text-align:center;
                     font-weight:bold;
@@ -242,13 +277,16 @@
                     transform:rotate(180deg);
                     transition:all 1s;
                 }
+                .operaciones{
+                	padding:0px;
+                }
             </style>
             <nav>
                 <div class="enlaces">
                    
                 </div>
                 <div class="operaciones">
-                    <div id="ocultar"><span class="icono">></span>Ocultar</div>
+                    <div id="ocultar"><span class="icono relieve">></span>Ocultar</div>
                 </div>
             </nav>
             <script>
@@ -285,6 +323,7 @@
                 
                 // Contenido de los enlaces
                 let menu = document.querySelector("main nav .enlaces")
+                let elementos_menu = []
                 menu.innerHTML = "";
                 fetch("api/menu.json")
                 .then(function(respuesta){
@@ -294,8 +333,11 @@
                     console.log(datos)
                     datos.forEach(function(dato){
                         let div = document.createElement("div")
+                        
+                        elementos_menu.push(div)
                         let icono = document.createElement("span")
                         icono.classList.add("icono")
+                        icono.classList.add("relieve")
                         icono.textContent = dato.etiqueta[0]
                         div.appendChild(icono)
                         let texto = document.createElement("span")
@@ -304,6 +346,10 @@
                         menu.appendChild(div)
                        
                         div.onclick = function(){
+		                     elementos_menu.forEach(function(elemento_menu){
+		                     	elemento_menu.classList.remove("activo")
+		                     })
+                        	this.classList.add("activo")
                             console.log("Vamos a cargar datos")
                             document.querySelector("table thead tr").innerHTML = ""
                             document.querySelector("table tbody").innerHTML = ""
@@ -403,8 +449,21 @@
         </main>
         <footer>
             
+            <style>
             
-            Pié de página
+            
+            
+            footer{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: center;
+                align-items: center;
+                align-content: stretch;
+            }
+            
+        </style>
+            <p>(c) 2025 jocarsa | aplicación </p>
         </footer>
     </body>
 </html>
