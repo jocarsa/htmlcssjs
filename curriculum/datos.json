@@ -1,0 +1,71 @@
+{
+  "nombre": "Jose Vicente Carratalá Sanchis",
+  "telefono": "+34 620 89 17 18",
+  "email": "info@josevicentecarratala.com",
+  "titulo": "Profesor, desarrollador y diseñador",
+  "foto": "https://static.jocarsa.com/fotos/jose_vicente_carratala_curriculum.jpg",
+  "sobre_mi": "Profesional con amplia experiencia en formación, desarrollo de soluciones de software empresarial y proyectos de visualización 3D. Combina habilidades en programación, enseñanza y diseño visual, lo que le permite abordar proyectos desde una perspectiva integral.",
+  "habilidades": [
+    { "nombre": "Programación en Python", "nivel": 5 },
+    { "nombre": "Desarrollo web con HTML5 y CSS3", "nivel": 5 },
+    { "nombre": "Diseño y animación 3D", "nivel": 4 },
+    { "nombre": "Docencia y formación", "nivel": 5 }
+  ],
+  "idiomas": [
+    { "nombre": "Español", "nivel": 5 },
+    { "nombre": "Inglés", "nivel": 4 }
+  ],
+  "certificaciones": [
+    { "nombre": "Especialista en Creación de Entornos Virtuales Aplicados al Patrimonio", "nivel": 5 }
+  ],
+  "redes_sociales": [
+    { "nombre": "LinkedIn", "url": "https://linkedin.com/in/jvcarratala", "icono": "https://static.jocarsa.com/social/linkedin.png" },
+    { "nombre": "Facebook", "url": "https://facebook.com/carratala", "icono": "https://static.jocarsa.com/social/facebook.png" },
+    { "nombre": "Instagram", "url": "https://instagram.com/jvcarratala", "icono": "https://static.jocarsa.com/social/instagram.png" }
+  ],
+  "experiencia_profesional": [
+    {
+      "puesto": "Profesor",
+      "empresa": "Mastermedia",
+        "logo":"https://scontent.fvlc1-2.fna.fbcdn.net/v/t39.30808-6/241620964_2986511994939988_4838487535831172530_n.png?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=4UQE9EeHV4AQ7kNvgGqQBDG&_nc_oc=Adlv7tsoCIHLQywO7uQVMbAi06b7yMMinZp9nXXrCk5p5SOQ9qdwmKYMipgLm7jrxzQ&_nc_zt=23&_nc_ht=scontent.fvlc1-2.fna&_nc_gid=qpeEuMhZFbYMhMKUEhlyjQ&oh=00_AYH5bQE15Jx3SemX4mN5sjfGiHPghAnxVN-tKyPTJclbvA&oe=67F42C54",
+      "fecha": "2019 - Actualidad",
+      "descripcion": "Impartición de cursos relacionados con programación, desarrollo web y marketing digital. Desarrollo de material didáctico y planificación de contenidos."
+    },
+    {
+      "puesto": "Desarrollador y diseñador freelance",
+      "empresa": "Autónomo",
+        "logo":"https://static.jocarsa.com/logos/jocarsa | Indigo.svg",
+      "fecha": "2015 - Actualidad",
+      "descripcion": "Desarrollo de soluciones de software empresarial y proyectos de visualización 3D para diversos clientes. Gestión de proyectos desde la conceptualización hasta la implementación."
+    }
+  ],
+  "formacion": [
+    {
+      "titulo": "Especialista en Creación de Entornos Virtuales Aplicados al Patrimonio",
+      "institucion": "Universidad de Alicante",
+      "fecha": "2025",
+      "descripcion": "Formación especializada en la creación de entornos virtuales utilizando motores de juego como Unreal Engine. :contentReference[oaicite:4]{index=4}",
+        "logo":"https://cdn.worldvectorlogo.com/logos/universidad-de-alicante-1.svg"
+        
+    },
+    {
+      "titulo": "Máster en Inteligencia Artificial y Big Data",
+      "institucion": "AIDIMME",
+      "fecha": "2024",
+      "descripcion": "Estudios avanzados en la aplicación de inteligencia artificial y big data en el diseño de productos industriales. :contentReference[oaicite:5]{index=5}",
+        "logo":"https://yt3.googleusercontent.com/ytc/AIdro_lrN20_xs0uqypz-BKvh1tt3gUvdIXe-Jp6O_LBV_QbT9M=s900-c-k-c0x00ffffff-no-rj"
+    }
+  ],
+  "publicaciones": [
+    {
+      "titulo": "Aprende programación con Python: Desarrolla tus propias aplicaciones",
+      "fecha": "2023",
+      "descripcion": "Guía práctica para aprender a programar en Python desde cero, desarrollando aplicaciones funcionales. :contentReference[oaicite:6]{index=6}"
+    },
+    {
+      "titulo": "Aprende programación con C++: Desarrolla tus propias aplicaciones",
+      "fecha": "2023",
+      "descripcion": "Libro orientado a enseñar programación en C++ de manera práctica, ideal para desarrollar aplicaciones eficientes. :contentReference[oaicite:7]{index=7}"
+    }
+  ]
+}

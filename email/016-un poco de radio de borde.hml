@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <title>jocarsa | darksalmon : Software de fichaje laboral</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+            body{font-family: "Ubuntu",sans-serif}
+        </style>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <center>
+            <table 
+                   style="width:100%;" 
+                   border=1;
+                   >
+                <tr>
+                    <td></td>
+                    <td style="width:600px;">
+                        <center>
+                            <table border=1 style="width:100%;">
+                                <tr>
+                                    <td></td>
+                                    <td style="width:60%;">
+                                        <table border=1 style="width:100%">
+                                            <tr>
+                                                <td style="width:100px"><img 
+                                                     src="http://static.jocarsa.com/logos/jocarsa | DarkSalmon.svg" 
+                                                     alt="Logo jocarsa"
+                                                     style="width:100px;"
+                                                ></td>
+                                                <td>
+                                                    <h1 style="margin:0px;">jocarsa</h1>
+                                                    <h2 style="
+                                                               margin:0px;
+                                                               font-size:12px;
+                                                               ">
+                                                        Soluciones de software empresarial
+                                                    </h2>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                            
+                            
+                            <div style="
+                                        background:darksalmon;
+                                        padding:30px;
+                                        color:white;
+                                        margin-top:20px;
+                                        margin-bottom:20px;
+                                        ">
+                                <img 
+                                     src="https://static.jocarsa.com/logos/darksalmon.png"
+                                     style="width:100px;"
+                                     >
+                                <h3>jocarsa | darksalmon</h3>
+                                <p>Software de fichaje laboral</p>
+                                <p>Plataforma para el control de empleados, asistencia y recursos humanos con geolocalización y gestión integral desde el navegador.
+</p>
+                            </div>
+                            <img 
+                                 src="https://static.jocarsa.com/capturas/darksalmon.png"
+                                 style="width:100%;"
+                                 >
+                        </center>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </center>
+    </body>
+</html>

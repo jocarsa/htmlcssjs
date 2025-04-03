@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <title>Curriculum Jose Vicente Carratala</title>
+        <meta charset="utf-8">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+            html{
+                background:lightgrey;
+                font-family: Ubuntu,sans-serif,Arial;
+            }
+            body{
+                background:white;
+                width:800px;
+                size: A4;
+                margin:auto;
+                padding:50px;
+            }
+            h1,h2,h3,h4,h5{
+                margin:0px;
+            }
+            header{
+                display:flex;
+                gap:20px;
+                align-items: center;
+            }
+            header img{
+                flex:1;
+                border-radius:1000px;
+                width:200px;
+                height:200px;
+                margin:20px;
+            }
+            header h1{
+                font-size:50px;
+            }
+            header .texto{
+                flex:4;
+            }
+            header .texto *{
+                margin:0px;
+            }
+            header .texto h2{
+                font-weight:normal;
+                font-size:15px;
+            }
+            main{
+                display:flex;
+                gap:30px;
+            }
+            main section:first-child{
+                flex:2;
+            }
+            main section:last-child{
+                flex:3;
+            }
+            p{
+                text-align:justify;
+                margin:0px;
+                font-size:12px;
+            }
+            article{
+                margin:20px 0px;
+                border-bottom:1px solid lightgray;
+                padding-bottom:20px;
+            }
+            .social img{
+                width:30px;
+                filter:invert(1);
+                margin-right:10px;
+            }
+            .social p{
+                display:flex;
+                align-items: center;
+                margin-top:10px;
+            }
+            #experiencias article{
+                display:flex;
+                gap:20px;
+            }
+            #experiencias article img{
+                width:20%;
+            }
+            #formaciones article{
+                display:flex;
+                gap:20px;
+            }
+            #formaciones article img{
+                width:20%;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <img src="https://static.jocarsa.com/fotos/jose_vicente_carratala_curriculum.jpg">
+            <div class="texto">
+                <h1></h1>
+                <h2 id="telefono"></h2>
+                <h2 id="email"></h2>
+                <h2 id="titulo"></h2>
+            </div>
+        </header>
+        <main>
+            <section>
+                <article id="sobremi">
+                    <h3>Sobre mi</h3>
+                    <p></p>
+                </article>
+                <article id="habilidades">
+                    <h3>Habilidades</h3>
+                    <template id="plantilla_habilidad">
+                        <p><span id="nivel"></span><span id="nombre"></span></p>
+                    </template>
+                    
+                </article>
+                <article id="idiomas">
+                    <h3>Idiomas</h3>
+                    <template id="plantilla_idioma">
+                        <p><span id="nivel"></span><span id="nombre"></span></p>
+                    </template>
+                    
+                </article>
+                <article id="certificaciones">
+                    <h3>Certificaciones</h3>
+                    <template id="plantilla_certificacion">
+                        <p><span id="nivel"></span><span id="nombre"></span></p>
+                    </template>
+                    
+                </article>
+                <article class="social">
+                    <h3>En las redes</h3>
+                    <template id="plantilla_redsocial">
+                        <p><img src="https://static.jocarsa.com/social/facebook.png"><span id="nombre"></span></p>
+                    </template>
+                </article>
+            </section>
+            <section>
+                
+                <div id="experiencias">
+                    
+                    <h3>Experiencia profesional</h3>
+                    <template id="experiencia">
+                        <article>
+                            <img src="">
+                            <div class="texto">
+                                <h4></h4>
+                                <h5></h5>
+                                <time></time>
+                                <p></p>
+                            </div>
+                        </article>
+                    </template>
+                
+                </div>
+                <div id="formaciones">
+                    <h3>Formación</h3>
+                    <template id="formacion">
+                        <article>
+                            <img src="">
+                            <div class="texto">
+                                <h4></h4>
+                                <h5></h5>
+                                <time></time>
+                                <p></p>
+                            </div>
+                        </article>
+                    </template>
+                    
+                </div>
+            </section>
+        </main>
+        <script>
+            fetch("datos.json")
+            .then(function(respuesta){
+                return respuesta.json();
+            })
+            .then(function(datos){
+                console.log(datos);
+                // Datos de la cabecera
+                document.querySelector("header h1").textContent = datos.nombre;
+                document.querySelector("header #telefono").textContent = datos.telefono;
+                document.querySelector("header #email").textContent = datos.email;
+                document.querySelector("header #titulo").textContent = datos.titulo;
+                document.querySelector("header img").setAttribute("src",datos.foto);
+                // Sobre mi
+                document.querySelector("#sobremi p").textContent = datos.sobre_mi;
+                // Habilidades
+                let plantilla = document.querySelector("#plantilla_habilidad");
+                let contenedor = document.querySelector("#habilidades");
+                datos.habilidades.forEach(function(habilidad){
+                    let instancia = plantilla.content.cloneNode(true);
+                    for(let i = 0;i<habilidad.nivel*1;i++){
+                        instancia.querySelector("#nivel").textContent += "🔵";
+                    }
+                    
+                    instancia.querySelector("#nombre").textContent = habilidad.nombre;
+                    contenedor.appendChild(instancia);
+                })
+                // Idiomas
+                plantilla = document.querySelector("#plantilla_idioma");
+                contenedor = document.querySelector("#idiomas");
+                datos.idiomas.forEach(function(idioma){
+                    let instancia = plantilla.content.cloneNode(true);
+                    for(let i = 0;i<idioma.nivel*1;i++){
+                        instancia.querySelector("#nivel").textContent += "🔵";
+                    }
+                    
+                    instancia.querySelector("#nombre").textContent = idioma.nombre;
+                    contenedor.appendChild(instancia);
+                })
+                // Idiomas
+                plantilla = document.querySelector("#plantilla_certificacion");
+                contenedor = document.querySelector("#certificaciones");
+                datos.certificaciones.forEach(function(certificacion){
+                    let instancia = plantilla.content.cloneNode(true);
+                    for(let i = 0;i<certificacion.nivel*1;i++){
+                        instancia.querySelector("#nivel").textContent += "🔵";
+                    }
+                    
+                    instancia.querySelector("#nombre").textContent = certificacion.nombre;
+                    contenedor.appendChild(instancia);
+                })
+                // Redes sociales
+                plantilla = document.querySelector("#plantilla_redsocial");
+                contenedor = document.querySelector(".social");
+                datos.redes_sociales.forEach(function(red_social){
+                    let instancia = plantilla.content.cloneNode(true);
+                    instancia.querySelector("img").setAttribute("src",red_social.icono)
+                    
+                    instancia.querySelector("#nombre").textContent = red_social.url;
+                    contenedor.appendChild(instancia);
+                })
+                // Experiencia
+                plantilla = document.querySelector("#experiencia");
+                contenedor = document.querySelector("#experiencias");
+                datos.experiencia_profesional.forEach(function(experiencia){
+                    let instancia = plantilla.content.cloneNode(true);
+                    instancia.querySelector("h4").textContent = experiencia.puesto;
+                    instancia.querySelector("h5").textContent = experiencia.empresa;
+                    instancia.querySelector("time").textContent = experiencia.fecha;
+                    instancia.querySelector("p").textContent = experiencia.descripcion;
+                    instancia.querySelector("img").setAttribute("src",experiencia.logo);
+                    contenedor.appendChild(instancia);
+                })
+                // Formacion
+                plantilla = document.querySelector("#formacion");
+                contenedor = document.querySelector("#formaciones");
+                datos.formacion.forEach(function(unaformacion){
+                    let instancia = plantilla.content.cloneNode(true);
+                    instancia.querySelector("h4").textContent = unaformacion.titulo;
+                    instancia.querySelector("h5").textContent = unaformacion.institucion;
+                    instancia.querySelector("time").textContent = unaformacion.fecha;
+                    instancia.querySelector("p").textContent = unaformacion.descripcion;
+                    instancia.querySelector("img").setAttribute("src",unaformacion.logo);
+                    contenedor.appendChild(instancia);
+                })
+            })
+        </script>
+    </body>
+</html>
+
+
+
+
