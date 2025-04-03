@@ -1,0 +1,63 @@
+
+        <main id="contacto">
+            <form>
+                <h3>Formulario de contacto</h3>
+                <p>Para ponerte en contacto con nosotros, puedes utilizar este formulario</p>
+                
+                
+                <label>Indica tu nombre</label>
+                <div class="ayuda" id="ayudanombre"></div>
+                <input type="text" name="nombre" placeholder="p.ej: Jose Vicente" required>
+                
+                
+                <label>Indica tu email</label>
+                <div class="ayuda" id="ayudaemail"></div>
+                <input type="email" name="email" placeholder="p.ej: josevicente@jocarsa.com" required>
+                
+                
+                <label>Indica el asunto de tu mensaje</label>
+                <div class="ayuda" id="ayudaasunto"></div>
+                <input type="text" name="asunto" placeholder="p.ej: Contacto comercial" required>
+                
+                
+                <label>Introduce tu mensaje</label>
+                <div class="ayuda" id="ayudamensaje"></div>
+                <textarea name="mensaje"></textarea>
+                
+                
+                <input type="submit" disabled>
+            </form>
+            <script>
+                let cuerpo = document.querySelector("body");
+                let nombre = document.querySelector("input[name=nombre]");
+                let email = document.querySelector("input[name=email]");
+                let asunto = document.querySelector("input[name=asunto]");
+                let mensaje = document.querySelector("textarea");
+                let boton = document.querySelector("input[type=submit]");
+                cuerpo.onkeyup = function(evento){
+                    if(nombre.value.length < 5){
+                        document.querySelector("#ayudanombre").textContent = "Introduce un mínimo de 5 caracteres"
+                    }else{
+                        document.querySelector("#ayudanombre").textContent = ""
+                    }
+                    console.log("Alguien ha pulsado una tecla");
+                    if(
+                        nombre.value.length > 5
+                        &&
+                        email.value.length > 5
+                        &&
+                        asunto.value.length > 5
+                        &&
+                        mensaje.value.length > 5
+                    ){
+                        boton.removeAttribute("disabled")
+                        boton.title = "";
+                    }else{
+                        boton.setAttribute("disabled",true);
+                        boton.title = "Los campos tienen una longitud mínima";
+                    }
+                }
+            </script>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d22363.58179853827!2d-0.41172551523433876!3d39.464665899879314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2ses!4v1743498713194!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </main>
+
