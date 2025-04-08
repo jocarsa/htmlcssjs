@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Calendar</title>
+    <style>
+        @media print {
+            body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+            .monthly-calendar { page-break-after: always; width: 100%; }
+            .month { border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; page-break-after: always; }
+            .day { border: 1px solid #eee; padding: 10px; text-align: center; }
+        }
+        @page { size: A4; margin: 0; }
+    </style>
+</head>
+<body>
+    <div class="monthly-calendar">
+        <div class="month">
+            <h2>January 2025</h2>
+            <div class="day">1</div>
+            <!-- Repeat for each day of the month -->
+        </div>
+        <!-- Repeat for each month of the year -->
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const monthlyCalendar = document.querySelector('.monthly-calendar');
+            const months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+
+            for (let month = 0; month < 12; month++) {
+                const monthDiv = document.createElement('div');
+                monthDiv.classList.add('month');
+                monthDiv.innerHTML = `<h2>${months[month]} 2025</h2>`;
+
+                const daysInMonth = new Date(2025, month + 1, 0).getDate();
+                const firstDay = new Date(2025, month, 1).getDay();
+
+                for (let i = 0; i < firstDay; i++) {
+                    const emptyDay = document.createElement('div');
+                    emptyDay.classList.add('day');
+                    monthDiv.appendChild(emptyDay);
+                }
+
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dayDiv = document.createElement('div');
+                    dayDiv.classList.add('day');
+                    dayDiv.textContent = day;
+                    monthDiv.appendChild(dayDiv);
+                }
+
+                monthlyCalendar.appendChild(monthDiv);
+            }
+        });
+    </script>
+</body>
+</html>

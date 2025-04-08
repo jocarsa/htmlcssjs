@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile WebApp Template</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- App Header (will be loaded dynamically) -->
+  <header id="appHeader"></header>
+
+  <!-- Main Screen with welcome message (loaded dynamically) -->
+  <main id="mainScreen"></main>
+
+  <!-- Content Screen (for dynamic section content) -->
+  <section id="contentScreen" class="hidden">
+    <button id="backButton">← Back</button>
+    <div id="contentContainer"></div>
+  </section>
+
+  <!-- Bottom Navigation Bar (items added dynamically) -->
+  <nav id="bottomNav"></nav>
+
+  <script src="script.js"></script>
+</body>
+</html>

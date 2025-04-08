@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Calendar</title>
+    <style>
+        @media print {
+            body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+            .weekly-calendar { page-break-after: always; width: 100%; }
+            .week { display: flex; flex-direction: row; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; page-break-after: always; }
+            .day { flex: 1; border-right: 1px solid #eee; padding: 10px; }
+            .hour-slot { border-bottom: 1px solid #eee; padding: 5px 0; }
+        }
+        @page { size: A4; margin: 0; }
+    </style>
+</head>
+<body>
+    <div class="weekly-calendar">
+        <div class="week">
+            <h2>Week 1</h2>
+            <div class="day">
+                <h3>Monday</h3>
+                <div class="hour-slot" id="hour-0">00:00</div>
+                <!-- Repeat for each hour slot -->
+                <div class="hour-slot" id="hour-23">23:00</div>
+            </div>
+            <!-- Repeat for each day of the week -->
+        </div>
+        <!-- Repeat for each week of the year -->
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const weeklyCalendar = document.querySelector('.weekly-calendar');
+            const startDate = new Date(2025, 0, 1);
+            const endDate = new Date(2025, 11, 31);
+            const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+            let weekNumber = 1;
+            let weekDiv = document.createElement('div');
+            weekDiv.classList.add('week');
+            weekDiv.innerHTML = `<h2>Week ${weekNumber}</h2>`;
+
+            for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
+                const dayDiv = document.createElement('div');
+                dayDiv.classList.add('day');
+                dayDiv.innerHTML = `<h3>${daysOfWeek[date.getDay()]}</h3>`;
+
+                for (let hour = 0; hour < 24; hour++) {
+                    const hourDiv = document.createElement('div');
+                    hourDiv.classList.add('hour-slot');
+                    hourDiv.id = `hour-${hour}`;
+                    hourDiv.textContent = `${hour.toString().padStart(2, '0')}:00`;
+                    dayDiv.appendChild(hourDiv);
+                }
+
+                weekDiv.appendChild(dayDiv);
+
+                if (date.getDay() === 6 || date >= endDate) {
+                    weeklyCalendar.appendChild(weekDiv);
+                    weekNumber++;
+                    weekDiv = document.createElement('div');
+                    weekDiv.classList.add('week');
+                    weekDiv.innerHTML = `<h2>Week ${weekNumber}</h2>`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

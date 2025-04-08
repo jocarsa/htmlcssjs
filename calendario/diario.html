@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Calendar</title>
+    <style>
+        @media print {
+            body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+            .daily-calendar { page-break-after: always; width: 100%; height: 100%; }
+            .day { border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; page-break-after: always; height: 100%; }
+            .hour-slot { border-bottom: 1px solid #eee; padding: 5px 0; }
+        }
+        @page { size: A4; margin: 0; }
+    </style>
+</head>
+<body>
+    <div class="daily-calendar">
+        <div class="day">
+            <h2>January 1, 2025</h2>
+            <div class="hour-slot" id="hour-0">00:00</div>
+            <!-- Repeat for each hour slot -->
+            <div class="hour-slot" id="hour-23">23:00</div>
+        </div>
+        <!-- Repeat for each day of the year -->
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const dailyCalendar = document.querySelector('.daily-calendar');
+            const startDate = new Date(2025, 0, 1);
+            const endDate = new Date(2025, 11, 31);
+
+            for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
+                const dayDiv = document.createElement('div');
+                dayDiv.classList.add('day');
+                dayDiv.innerHTML = `<h2>${date.toDateString()}</h2>`;
+
+                for (let hour = 0; hour < 24; hour++) {
+                    const hourDiv = document.createElement('div');
+                    hourDiv.classList.add('hour-slot');
+                    hourDiv.id = `hour-${hour}`;
+                    hourDiv.textContent = `${hour.toString().padStart(2, '0')}:00`;
+                    dayDiv.appendChild(hourDiv);
+                }
+
+                dailyCalendar.appendChild(dayDiv);
+            }
+        });
+    </script>
+</body>
+</html>

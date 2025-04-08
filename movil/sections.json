@@ -1,0 +1,31 @@
+{
+  "sections": [
+    {
+      "id": "home",
+      "icon": "🏠",
+      "title": "Home",
+      "content": "Welcome to the Home section! Enjoy your stay."
+    },
+    {
+      "id": "news",
+      "icon": "📰",
+      "title": "News",
+      "content": [
+        {
+          "header": "Breaking News",
+          "body": "Stay tuned for the latest updates."
+        },
+        {
+          "header": "Daily Update",
+          "body": "Here’s what happened today in the world."
+        }
+      ]
+    },
+    {
+      "id": "profile",
+      "icon": "👤",
+      "title": "Profile",
+      "content": "This is your profile page. Manage your settings and personal info."
+    }
+  ]
+}

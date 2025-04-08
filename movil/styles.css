@@ -1,0 +1,145 @@
+/* Global Reset and Font Settings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: #191414;
+  color: #fff;
+  padding-bottom: 60px; /* Space for bottom navigation */
+}
+
+/* Login Screen Styling */
+#loginScreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #191414;
+}
+
+#loginScreen form {
+  background: #121212;
+  padding: 2rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#loginScreen h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+#loginScreen input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 2px;
+}
+
+#loginScreen button {
+  background: #1DB954;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 2rem;
+  font-size: 1rem;
+}
+
+/* Main Application Styles */
+header {
+  background: #121212;
+  border-bottom: 1px solid #282828;
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.75rem;
+}
+
+header button {
+  background: #e74c3c;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 2rem;
+}
+
+main {
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.125rem;
+}
+
+#contentScreen {
+  padding: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+#backButton {
+  background: #1DB954;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 2rem;
+  font-size: 1rem;
+  display: block;
+  margin: 0 auto 1rem auto;
+}
+
+article {
+  background: #282828;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+article h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* Bottom Navigation Styling */
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #121212;
+  border-top: 1px solid #282828;
+  z-index: 100;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  flex: 1;
+  text-align: center;
+  padding: 0.75rem 0;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+nav li:hover {
+  background: #282828;
+}
