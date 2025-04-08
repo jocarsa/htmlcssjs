@@ -9,6 +9,23 @@ body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background: #191414;
   color: #fff;
+}
+
+/* Screen Management */
+.screen {
+  min-height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* App Container */
+#appContainer {
   padding-bottom: 60px; /* Space for bottom navigation */
 }
 
@@ -18,7 +35,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   background: #191414;
 }
 
@@ -27,6 +43,8 @@ body {
   padding: 2rem;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  width: 80%;
+  max-width: 400px;
 }
 
 #loginScreen h2 {
@@ -36,20 +54,37 @@ body {
 
 #loginScreen input {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.8rem;
   margin-bottom: 1rem;
   border: none;
   border-radius: 2px;
+  font-size: 1rem;
 }
 
 #loginScreen button {
+  width: 100%;
   background: #1DB954;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1rem;
   color: #fff;
   cursor: pointer;
   border-radius: 2rem;
   font-size: 1rem;
+  font-weight: bold;
+}
+
+#loginScreen .message {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+#loginScreen .error {
+  color: #e74c3c;
+}
+
+#loginScreen .info {
+  color: #3498db;
 }
 
 /* Main Application Styles */
@@ -67,13 +102,14 @@ header h1 {
   font-size: 1.75rem;
 }
 
-header button {
+#logoutButton {
   background: #e74c3c;
   border: none;
   color: #fff;
   padding: 0.5rem 1rem;
   cursor: pointer;
   border-radius: 2rem;
+  font-size: 0.9rem;
 }
 
 main {
@@ -84,10 +120,6 @@ main {
 
 #contentScreen {
   padding: 1rem;
-}
-
-.hidden {
-  display: none;
 }
 
 #backButton {

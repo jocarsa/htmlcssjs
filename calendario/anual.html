@@ -1,24 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yearly Calendar</title>
+    <title>Calendario Anual</title>
     <style>
+        body { font-family: 'Helvetica Neue', sans-serif; margin: 20px; }
+        .yearly-calendar { max-width: 800px; margin: auto; }
+        .month { border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        .day { border: 1px solid #f1f1f1; padding: 20px; text-align: center; border-radius: 4px; }
+        h2 { color: #333; }
+
         @media print {
-            body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+            body { margin: 0; padding: 0; }
             .yearly-calendar { page-break-after: always; width: 100%; }
-            .month { border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; page-break-after: always; }
-            .day { border: 1px solid #eee; padding: 10px; text-align: center; }
+            .month { page-break-after: always; }
         }
-        @page { size: A4; margin: 0; }
+        @page { size: A4 landscape; margin: 0; }
     </style>
 </head>
 <body>
     <div class="yearly-calendar">
         <h2>2025</h2>
         <div class="month">
-            <h3>January</h3>
+            <h3>Enero</h3>
             <div class="day">1</div>
             <!-- Repeat for each day of the month -->
         </div>
@@ -26,10 +31,12 @@
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const year = urlParams.get('year') || new Date().getFullYear();
             const yearlyCalendar = document.querySelector('.yearly-calendar');
             const months = [
-                'January', 'February', 'March', 'April', 'May', 'June',
-                'July', 'August', 'September', 'October', 'November', 'December'
+                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
             ];
 
             for (let month = 0; month < 12; month++) {
@@ -37,8 +44,8 @@
                 monthDiv.classList.add('month');
                 monthDiv.innerHTML = `<h3>${months[month]}</h3>`;
 
-                const daysInMonth = new Date(2025, month + 1, 0).getDate();
-                const firstDay = new Date(2025, month, 1).getDay();
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                const firstDay = new Date(year, month, 1).getDay();
 
                 for (let i = 0; i < firstDay; i++) {
                     const emptyDay = document.createElement('div');

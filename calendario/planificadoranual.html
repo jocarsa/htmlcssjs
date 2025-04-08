@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Anual Completo</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        
+        .yearly-planner {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .year-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .months-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        .month-container {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .month-title {
+            background-color: #f2f2f2;
+            text-align: center;
+            padding: 5px;
+            font-weight: bold;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        
+        th, td {
+            text-align: center;
+            padding: 3px 1px;
+            font-size: 12px;
+        }
+        
+        th {
+            background-color: #f9f9f9;
+            font-weight: normal;
+        }
+        
+        td {
+            border: 1px solid #f0f0f0;
+        }
+        
+        .week-number {
+            background-color: #f9f9f9;
+            font-size: 10px;
+            color: #666;
+            width: 16px;
+        }
+        
+        .today {
+            background-color: #e6f7ff;
+            font-weight: bold;
+        }
+        
+        .weekend {
+            background-color: #f9f9f9;
+            color: #999;
+        }
+        
+        .other-month {
+            color: #ccc;
+        }
+        
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            
+            .yearly-planner {
+                width: 100%;
+            }
+            
+            @page {
+                size: A4 landscape;
+                margin: 10mm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="yearly-planner">
+        <h1 class="year-title">Calendario <span id="currentYear">2025</span></h1>
+        <div class="months-grid" id="monthsContainer">
+            <!-- Months will be generated here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the year from URL parameter or use current year
+            const urlParams = new URLSearchParams(window.location.search);
+            const year = parseInt(urlParams.get('year')) || new Date().getFullYear();
+            
+            // Update the year in the title
+            document.getElementById('currentYear').textContent = year;
+            
+            // Month names in Spanish
+            const monthNames = [
+                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+            ];
+            
+            // Day names (short) in Spanish
+            const dayNames = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+            
+            const monthsContainer = document.getElementById('monthsContainer');
+            
+            // Create each month
+            for (let monthIndex = 0; monthIndex < 12; monthIndex++) {
+                const monthContainer = document.createElement('div');
+                monthContainer.className = 'month-container';
+                
+                // Month title
+                const monthTitle = document.createElement('div');
+                monthTitle.className = 'month-title';
+                monthTitle.textContent = monthNames[monthIndex];
+                monthContainer.appendChild(monthTitle);
+                
+                // Create table
+                const table = document.createElement('table');
+                
+                // Create header row with day names
+                const thead = document.createElement('thead');
+                const headerRow = document.createElement('tr');
+                
+                // Add week number header
+                const weekHeader = document.createElement('th');
+                weekHeader.textContent = 'Sem';
+                headerRow.appendChild(weekHeader);
+                
+                // Add day names
+                dayNames.forEach(day => {
+                    const th = document.createElement('th');
+                    th.textContent = day;
+                    headerRow.appendChild(th);
+                });
+                
+                thead.appendChild(headerRow);
+                table.appendChild(thead);
+                
+                // Create table body
+                const tbody = document.createElement('tbody');
+                
+                // Get first day of the month (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+                const firstDay = new Date(year, monthIndex, 1).getDay();
+                // Adjust for Monday as first day of week (make Sunday the 7th day)
+                const firstDayAdjusted = firstDay === 0 ? 6 : firstDay - 1;
+                
+                // Get number of days in the month
+                const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+                
+                // Get days from previous month to fill the first row
+                const daysInPrevMonth = monthIndex === 0 
+                    ? new Date(year - 1, 12, 0).getDate() 
+                    : new Date(year, monthIndex, 0).getDate();
+                
+                let date = 1;
+                let nextMonthDate = 1;
+                
+                // Calculate how many weeks to display (usually 6, but can be 5 or 4)
+                const totalWeeks = Math.ceil((daysInMonth + firstDayAdjusted) / 7);
+                
+                // Create each week row
+                for (let week = 0; week < totalWeeks; week++) {
+                    const row = document.createElement('tr');
+                    
+                    // Calculate week number
+                    const currentDate = new Date(year, monthIndex, date - firstDayAdjusted + (week * 7));
+                    const weekNumber = getWeekNumber(currentDate);
+                    
+                    // Add week number cell
+                    const weekCell = document.createElement('td');
+                    weekCell.className = 'week-number';
+                    weekCell.textContent = weekNumber;
+                    row.appendChild(weekCell);
+                    
+                    // Create cells for each day of this week
+                    for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
+                        const cell = document.createElement('td');
+                        
+                        // Calculate if this cell belongs to previous month, current month, or next month
+                        if (week === 0 && dayOfWeek < firstDayAdjusted) {
+                            // Previous month
+                            cell.textContent = daysInPrevMonth - (firstDayAdjusted - dayOfWeek - 1);
+                            cell.className = 'other-month';
+                        } else if (date > daysInMonth) {
+                            // Next month
+                            cell.textContent = nextMonthDate++;
+                            cell.className = 'other-month';
+                        } else {
+                            // Current month
+                            cell.textContent = date;
+                            
+                            // Check if this is a weekend
+                            if (dayOfWeek === 5 || dayOfWeek === 6) {
+                                cell.className = 'weekend';
+                            }
+                            
+                            // Check if this is today
+                            const today = new Date();
+                            if (year === today.getFullYear() && 
+                                monthIndex === today.getMonth() && 
+                                date === today.getDate()) {
+                                cell.classList.add('today');
+                            }
+                            
+                            date++;
+                        }
+                        
+                        row.appendChild(cell);
+                    }
+                    
+                    tbody.appendChild(row);
+                }
+                
+                table.appendChild(tbody);
+                monthContainer.appendChild(table);
+                monthsContainer.appendChild(monthContainer);
+            }
+            
+            // Function to get ISO week number
+            function getWeekNumber(date) {
+                const target = new Date(date);
+                const dayNumber = (date.getDay() + 6) % 7;
+                target.setDate(target.getDate() - dayNumber + 3);
+                const firstThursday = target.valueOf();
+                target.setMonth(0, 1);
+                if (target.getDay() !== 4) {
+                    target.setMonth(0, 1 + ((4 - target.getDay()) + 7) % 7);
+                }
+                return 1 + Math.ceil((firstThursday - target) / 604800000);
+            }
+        });
+    </script>
+</body>
+</html>

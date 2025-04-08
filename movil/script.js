@@ -1,9 +1,93 @@
 // Global variables to cache configuration and sections
 let appConfig = null;
 let sectionsData = null;
+let currentUser = null;
 
-// When the DOM is ready, load both JSON files
+// When the DOM is ready, check login status and set up event listeners
 document.addEventListener('DOMContentLoaded', () => {
+  // Check if user is already logged in
+  checkLoginStatus();
+  
+  // Set up login form submission handler
+  document.getElementById('loginForm').addEventListener('submit', handleLogin);
+  
+  // Attach listener to Back button
+  document.getElementById('backButton').addEventListener('click', showMainScreen);
+});
+
+// Check if user is already logged in via localStorage
+function checkLoginStatus() {
+  const storedUser = localStorage.getItem('user');
+  
+  if (storedUser) {
+    try {
+      currentUser = JSON.parse(storedUser);
+      // Load application if user is logged in
+      loadAppData();
+    } catch (e) {
+      console.error("Error parsing stored user data:", e);
+      showLoginScreen();
+    }
+  } else {
+    // If no stored user, show login screen
+    showLoginScreen();
+  }
+}
+
+// Handle login form submission
+function handleLogin(event) {
+  event.preventDefault();
+  
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+  
+  if (!username || !password) {
+    showLoginMessage('Please enter username and password', 'error');
+    return;
+  }
+  
+  // Show loading message
+  showLoginMessage('Logging in...', 'info');
+  
+  // Send credentials to login.php
+  fetch('login.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ username, password })
+  })
+  .then(response => {
+    if (!response.ok) throw new Error('Login request failed');
+    return response.json();
+  })
+  .then(data => {
+    if (data.success) {
+      // Store user info in localStorage
+      currentUser = { username, loginTime: new Date().toISOString() };
+      localStorage.setItem('user', JSON.stringify(currentUser));
+      
+      // Load application data and show app
+      loadAppData();
+    } else {
+      showLoginMessage('Login failed. Please try again.', 'error');
+    }
+  })
+  .catch(error => {
+    console.error('Login error:', error);
+    showLoginMessage('Server error. Please try again later.', 'error');
+  });
+}
+
+// Display login message
+function showLoginMessage(message, type = 'info') {
+  const messageElement = document.getElementById('loginMessage');
+  messageElement.textContent = message;
+  messageElement.className = `message ${type}`;
+}
+
+// Load application configuration and sections data
+function loadAppData() {
   Promise.all([
     fetch('config.json').then(response => {
       if (!response.ok) throw new Error("Failed to load config.json");
@@ -18,28 +102,68 @@ document.addEventListener('DOMContentLoaded', () => {
     appConfig = config;
     sectionsData = sections;
     initializeApp();
+    showAppScreen(); // Show the app screen after data is loaded
   })
   .catch(err => {
     console.error(err);
+    showLoginMessage('Failed to load application data', 'error');
+    // Show login screen again if app data fails to load
+    showLoginScreen();
   });
+}
 
-  // Attach listener to Back button (exists in HTML)
-  document.getElementById('backButton').addEventListener('click', showMainScreen);
-});
+// Show login screen and hide app
+function showLoginScreen() {
+  document.getElementById('loginScreen').classList.remove('hidden');
+  document.getElementById('appContainer').classList.add('hidden');
+  // Clear login form
+  document.getElementById('username').value = '';
+  document.getElementById('password').value = '';
+  document.getElementById('loginMessage').textContent = '';
+}
+
+// Show app and hide login screen
+function showAppScreen() {
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('appContainer').classList.remove('hidden');
+}
+
+// Handle logout
+function logout() {
+  // Clear localStorage
+  localStorage.removeItem('user');
+  currentUser = null;
+  
+  // Reset app state
+  document.getElementById('mainScreen').classList.remove('hidden');
+  document.getElementById('contentScreen').classList.add('hidden');
+  
+  // Show login screen
+  showLoginScreen();
+}
 
 // Initialize the app based on configuration and sections JSON
 function initializeApp() {
-  // Set the header text dynamically
+  // Set the header text dynamically and add logout button
   const headerEl = document.getElementById('appHeader');
-  headerEl.innerHTML = `<h1>${appConfig.headerTitle}</h1>`;
+  headerEl.innerHTML = `
+    <h1>${appConfig.headerTitle}</h1>
+    <button id="logoutButton">Logout</button>
+  `;
+  
+  // Add event listener to logout button
+  document.getElementById('logoutButton').addEventListener('click', logout);
 
-  // Set the main welcome message dynamically
+  // Set the main welcome message with personalized greeting
   const mainScreen = document.getElementById('mainScreen');
-  mainScreen.innerHTML = `<p>${appConfig.welcomeMessage}</p>`;
+  mainScreen.innerHTML = `
+    <p>Hello, ${currentUser.username}!</p>
+    <p>${appConfig.welcomeMessage}</p>
+  `;
 
   // Build the bottom navigation dynamically using sections data
-  // Here, we display only the icon from each section
   const bottomNav = document.getElementById('bottomNav');
+  bottomNav.innerHTML = ''; // Clear any existing content
   let ul = document.createElement('ul');
   sectionsData.sections.forEach(section => {
     let li = document.createElement('li');

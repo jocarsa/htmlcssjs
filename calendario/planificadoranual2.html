@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificador Anual</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        
+        .yearly-planner {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .year-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 10px;
+            padding: 2px 0;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            padding: 5px 0;
+        }
+        
+        .month-header {
+            background-color: #e0e0e0;
+            font-weight: bold;
+            padding: 5px 0;
+        }
+        
+        .day-num {
+            width: 1%;
+            font-weight: bold;
+            
+        }
+        
+        .day-name {
+            width: 1%;
+            color: #555;
+            border-left: none;
+            
+        }
+        
+        .day-space {
+            width: 70%;
+            border-left: none;
+            height: 18px;
+        }
+        
+        .sunday {
+            background-color: #f9f9f9;
+        }
+        td{border-right:1px solid lightgrey;}
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            
+            .yearly-planner {
+                width: 100%;
+            }
+            
+            @page {
+                size: A4 landscape;
+                margin: 10mm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="yearly-planner">
+        <h1 class="year-title">Planificador <span id="currentYear">2025</span></h1>
+        <table id="yearPlanner">
+            <thead>
+                <tr id="monthHeaders">
+                    <!-- Month headers will be generated here -->
+                </tr>
+            </thead>
+            <tbody id="plannerBody">
+                <!-- Days will be generated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the year from URL parameter or use current year
+            const urlParams = new URLSearchParams(window.location.search);
+            const year = parseInt(urlParams.get('year')) || new Date().getFullYear();
+            
+            // Update the year in the title
+            document.getElementById('currentYear').textContent = year;
+            
+            // Month names in Spanish
+            const monthNames = [
+                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+            ];
+            
+            // Day names in Spanish
+            const dayNames = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+            
+            const monthHeadersRow = document.getElementById('monthHeaders');
+            
+            // Create month headers
+            monthNames.forEach(monthName => {
+                const th = document.createElement('th');
+                th.colSpan = 3;
+                th.className = 'month-header';
+                th.textContent = monthName;
+                monthHeadersRow.appendChild(th);
+            });
+            
+            const plannerBody = document.getElementById('plannerBody');
+            
+            // Find the maximum number of days across all months (31)
+            const maxDays = 31;
+            
+            // Create rows for each possible day
+            for (let day = 1; day <= maxDays; day++) {
+                const row = document.createElement('tr');
+                
+                // Create cells for each month
+                for (let month = 0; month < 12; month++) {
+                    // Calculate the day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+                    const dayDate = new Date(year, month, day);
+                    
+                    // Check if this day exists in the current month
+                    const daysInMonth = new Date(year, month + 1, 0).getDate();
+                    
+                    if (day <= daysInMonth) {
+                        // Day number cell
+                        const dayNumCell = document.createElement('td');
+                        dayNumCell.className = 'day-num';
+                        dayNumCell.textContent = day;
+                        
+                        // Day name cell
+                        const dayNameCell = document.createElement('td');
+                        dayNameCell.className = 'day-name';
+                        // Get day of week (0-6 where 0 is Sunday), adjust to get Monday as 0
+                        const dayOfWeek = dayDate.getDay();
+                        // Convert to Spanish format where Monday is 0 and Sunday is 6
+                        const spanishDayIndex = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+                        dayNameCell.textContent = dayNames[spanishDayIndex];
+                        
+                        // Day space cell for writing
+                        const daySpaceCell = document.createElement('td');
+                        daySpaceCell.className = 'day-space';
+                        
+                        // Add Sunday highlighting
+                        if (dayOfWeek === 0) {
+                            dayNumCell.classList.add('sunday');
+                            dayNameCell.classList.add('sunday');
+                            daySpaceCell.classList.add('sunday');
+                        }
+                        
+                        row.appendChild(dayNumCell);
+                        row.appendChild(dayNameCell);
+                        row.appendChild(daySpaceCell);
+                    } else {
+                        // Empty cells for non-existent days
+                        const emptyCell = document.createElement('td');
+                        emptyCell.colSpan = 3;
+                        emptyCell.innerHTML = '&nbsp;';
+                        row.appendChild(emptyCell);
+                    }
+                }
+                
+                plannerBody.appendChild(row);
+            }
+        });
+    </script>
+</body>
+</html>

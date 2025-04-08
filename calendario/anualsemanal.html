@@ -1,68 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yearly Calendar (Week Format)</title>
-    <style>
-        @media print {
-            body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-            .yearly-week-calendar { page-break-after: always; width: 100%; }
-            table { width: 100%; border-collapse: collapse; page-break-after: always; }
-            th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        }
-        @page { size: A4; margin: 0; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendario Anual (Formato Semanal Transpuesto)</title>
+  <style>
+    body { font-family: 'Helvetica Neue', sans-serif; margin: 20px; }
+    .yearly-week-calendar { max-width: 1200px; margin: auto; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+    th, td { border: 1px solid #ddd; padding: 15px; text-align: center; }
+    th { background-color: #f9f9f9; }
+
+    @media print {
+      body { margin: 0; padding: 0; }
+      .yearly-week-calendar { page-break-after: always; width: 100%; }
+      table { page-break-after: always; }
+    }
+    @page { size: A4 landscape; margin: 0; }
+  </style>
 </head>
 <body>
-    <div class="yearly-week-calendar">
-        <h2>2025</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Week</th>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                    <th>Saturday</th>
-                    <th>Sunday</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Rows for each week of the year -->
-            </tbody>
-        </table>
-    </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const yearlyWeekCalendar = document.querySelector('.yearly-week-calendar tbody');
-            const startDate = new Date(2025, 0, 1);
-            const endDate = new Date(2025, 11, 31);
-            const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  <div class="yearly-week-calendar">
+    <h2>2025</h2>
+    <table>
+      <thead>
+        <!-- This header will be generated dynamically -->
+      </thead>
+      <tbody>
+        <!-- The body with day rows (L, M, X, J, V, S, D) will be generated dynamically -->
+      </tbody>
+    </table>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Use the year from the URL if provided, or fall back to the current year.
+      const urlParams = new URLSearchParams(window.location.search);
+      const year = parseInt(urlParams.get('year')) || new Date().getFullYear();
+      const table = document.querySelector('.yearly-week-calendar table');
+      const thead = table.querySelector('thead');
+      const tbody = table.querySelector('tbody');
 
-            let weekNumber = 1;
-            let weekRow = document.createElement('tr');
-            let weekCell = document.createElement('td');
-            weekCell.textContent = `Week ${weekNumber}`;
-            weekRow.appendChild(weekCell);
+      const startDate = new Date(year, 0, 1);
+      const endDate = new Date(year, 11, 31);
 
-            for (let date = startDate; date <= endDate; date.setDate(date.getDate() + 1)) {
-                const dayCell = document.createElement('td');
-                dayCell.textContent = date.getDate();
-                weekRow.appendChild(dayCell);
+      // Adjust the day index so that Monday = 0, Tuesday = 1, ..., Sunday = 6.
+      const getDayIndex = (date) => (date.getDay() + 6) % 7;
 
-                if (date.getDay() === 0 || date >= endDate) {
-                    yearlyWeekCalendar.appendChild(weekRow);
-                    weekNumber++;
-                    weekRow = document.createElement('tr');
-                    weekCell = document.createElement('td');
-                    weekCell.textContent = `Week ${weekNumber}`;
-                    weekRow.appendChild(weekCell);
-                }
-            }
+      // Build an array of weeks.
+      let weeks = [];
+      let currentWeek = new Array(7).fill('');
+      
+      // For the first week, fill with blanks until the first day appears.
+      let currentDate = new Date(startDate);
+      let firstDayIndex = getDayIndex(startDate);
+      for (let i = firstDayIndex; i < 7 && currentDate <= endDate; i++) {
+        currentWeek[i] = currentDate.getDate();
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+      weeks.push(currentWeek);
+
+      // Continue filling subsequent weeks.
+      while (currentDate <= endDate) {
+        currentWeek = new Array(7).fill('');
+        for (let i = 0; i < 7 && currentDate <= endDate; i++) {
+          currentWeek[i] = currentDate.getDate();
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+        weeks.push(currentWeek);
+      }
+
+      // --- Build the table header ---
+      // The first (top-left) header cell remains blank.
+      let headerRow = document.createElement('tr');
+      let thEmpty = document.createElement('th');
+      thEmpty.textContent = "";
+      headerRow.appendChild(thEmpty);
+
+      // Each subsequent header cell holds the week number (only the number).
+      for (let i = 0; i < weeks.length; i++) {
+        let thWeek = document.createElement('th');
+        thWeek.textContent = i + 1;  // week numbering begins at 1.
+        headerRow.appendChild(thWeek);
+      }
+      thead.innerHTML = "";
+      thead.appendChild(headerRow);
+
+      // --- Build the table body with day rows ---
+      // Day labels with only the first letter: L, M, X, J, V, S, D.
+      const dayLabels = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+      tbody.innerHTML = "";
+
+      // For each day of the week create a new row.
+      for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
+        let row = document.createElement('tr');
+        // The first cell of each row is the day label.
+        let thDay = document.createElement('th');
+        thDay.textContent = dayLabels[dayIndex];
+        row.appendChild(thDay);
+
+        // For each week, add the cell corresponding to this day.
+        weeks.forEach(week => {
+          let td = document.createElement('td');
+          td.textContent = week[dayIndex] || "";
+          row.appendChild(td);
         });
-    </script>
+        tbody.appendChild(row);
+      }
+    });
+  </script>
 </body>
 </html>
