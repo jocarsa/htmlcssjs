@@ -216,6 +216,8 @@ footer section:nth-child(2) *{
 /* Ajustes sobre la carga de datos json */
 article{
     background-size:cover;
+    background: rgb(230, 230, 230);
+    margin-bottom: 17px !important;
 }
 h2,h3{
    
